@@ -5,30 +5,38 @@ import edu.isu.cs.cs3308.structures.Graph;
 import edu.isu.cs.cs3308.structures.Vertex;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class GraphAL<V, E> implements Graph<V, E> {
+
+
+    private LinkedList<Vertex<V>> vertices = new LinkedList<>();
+    private LinkedList<Edge<E>> edges = new LinkedList<>();
     @Override
     public int numVertices() {
-        return 0;
+        return vertices.size();
     }
 
     @Override
     public Iterator<Vertex<V>> vertices() {
-        return null;
+        return vertices.iterator();
     }
 
     @Override
     public int numEdges() {
-        return 0;
+        return edges.size();
     }
 
     @Override
     public Iterator<Edge<E>> edges() {
-        return null;
+        return edges.iterator();
     }
 
     @Override
     public Edge<E> getEdge(V u, V v) {
+        Vertex<V> start = (Vertex<V>) u;
+        start.getOutgoing();
         return null;
     }
 
@@ -54,12 +62,13 @@ public class GraphAL<V, E> implements Graph<V, E> {
 
     @Override
     public Iterator<Edge<E>> outgoingEdges(Vertex<V> v) {
-        return null;
+        Vertex<V> ver = v;
+        return (Iterator<Edge<E>>) ver.getOutgoing();
     }
 
     @Override
     public Iterator<Edge<E>> incomingEdges(Vertex<V> v) {
-        return null;
+        return (Iterator<Edge<E>>) v.getIncoming();
     }
 
     @Override

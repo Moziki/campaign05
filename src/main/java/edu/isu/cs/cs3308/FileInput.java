@@ -10,8 +10,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class FileInput {
-    public GraphAl<V, E> ReadFile(String e) {
-        String fileName = "/data.txt";
+    public GraphAL<V, E> ReadFile(String e) {
+        LinkedList<E> something;
+        String fileName = e;
         try {
             URI uri = this.getClass().getResource(fileName).toURI();
             List<String> lines = Files.readAllLines(Paths.get(uri),

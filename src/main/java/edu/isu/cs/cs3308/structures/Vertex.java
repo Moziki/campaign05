@@ -11,8 +11,8 @@ public interface Vertex<V> {
     V getElement();
 
     /** Reutrns the list of outgoing edges of this vertex */
-    <E> List<Edge<E>> getOutgoing();
+    <E> List<Edge<V, E>> getOutgoing();
 
     /** Reutrns the list of incoming edges of this vertex */
-    <E> List<Edge<E>> getIncoming();
+    <E> List<Edge<V, E>> getIncoming();
 }

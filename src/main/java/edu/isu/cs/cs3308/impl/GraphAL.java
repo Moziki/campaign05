@@ -12,7 +12,7 @@ public class GraphAL<V, E> implements Graph<V, E> {
 
 
     private LinkedList<Vertex<V>> vertices = new LinkedList<>();
-    private LinkedList<Edge<E>> edges = new LinkedList<>();
+    private LinkedList<Edge<V, E>> edges = new LinkedList<>();
     @Override
     public int numVertices() {
         return vertices.size();
@@ -29,65 +29,105 @@ public class GraphAL<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public Iterator<Edge<E>> edges() {
+    public Iterator<Edge<V, E>> edges() {
         return edges.iterator();
     }
 
     @Override
-    public Edge<E> getEdge(V u, V v) {
-        Vertex<V> start = (Vertex<V>) u;
-        start.getOutgoing();
+    public Edge<V, E> getEdge(Vertex<V> u, Vertex<V> v) {
+        if (u == null || v == null) {
+            return null;
+        }
+        if (vertices.contains(u)) {
+            for (Edge<V, E> e : edges) {
+                if (e.getStart() == u && e.getEnd() == v) {
+                    return e;
+                }
+            }
+        }
         return null;
     }
 
     @Override
-    public Vertex<V>[] endVertices(Edge<E> e) {
-        return new Vertex[0];
+    public Vertex<V>[] endVertices(Edge<V, E> e) {
+         return new Vertex[]{(Vertex<V>) e.getStart(), (Vertex<V>) e.getEnd()};
     }
 
     @Override
-    public V opposite(Vertex<V> v, Edge<E> e) {
-        return null;
+    public Vertex<V> opposite(Vertex<V> v, Edge<V, E> e) {
+        if (e.getStart() == v) {
+            return (Vertex<V>) e.getEnd();
+        }
+        if (e.getEnd() == v) {
+            return (Vertex<V>) e.getStart();
+        }
+        else return null;
     }
 
     @Override
     public int outDegree(Vertex<V> v) {
-        return 0;
+        return v.getOutgoing().size();
     }
 
     @Override
     public int inDegree(Vertex<V> v) {
-        return 0;
+        return v.getIncoming().size();
     }
 
     @Override
-    public Iterator<Edge<E>> outgoingEdges(Vertex<V> v) {
+    public Iterator<Edge<V, E>> outgoingEdges(Vertex<V> v) {
         Vertex<V> ver = v;
-        return (Iterator<Edge<E>>) ver.getOutgoing();
+        return (Iterator<Edge<V, E>>) ver.getOutgoing();
     }
 
     @Override
-    public Iterator<Edge<E>> incomingEdges(Vertex<V> v) {
-        return (Iterator<Edge<E>>) v.getIncoming();
+    public Iterator<Edge<V, E>> incomingEdges(Vertex<V> v) {
+        return (Iterator<Edge<V, E>>) v.getIncoming();
     }
 
     @Override
     public Vertex<V> insertVertex(V v) {
-        return null;
+        Vertex<V> newOne = new VertexAL<>(v);
+        vertices.add(newOne);
+        return newOne;
     }
 
     @Override
-    public void insertEdge(Vertex<V> u, Vertex<V> v, E e) {
+    public void insertEdge(V u, V v, E e) {
+        Edge<V, E> newEdge = new EdgeAL<>(u, v, e);
+        edges.add(newEdge);
+        for (Vertex<V> vert : vertices) {
 
+            if (vert.getElement() == u) {
+                ((VertexAL<V>) vert).addOutgoing(newEdge);
+            }
+            if (vert.getElement() == v) {
+                ((VertexAL<V>) vert).addIncoming(newEdge);
+            }
+        }
     }
 
     @Override
     public V removeVertex(Vertex<V> v) {
-        return null;
+        vertices.remove(v);
+        for (Edge e : v.getOutgoing()) {
+            removeEdge(e);
+        }
+        for (Edge e : v.getIncoming()) {
+            removeEdge(e);
+        }
+        V elem = v.getElement();
+        return elem;
     }
 
     @Override
-    public E removeEdge(Edge<E> e) {
-        return null;
+    public E removeEdge(Edge<V, E> e) {
+        edges.remove(e);
+        VertexAL<V> start = (VertexAL<V>)e.getStart();
+        start.getOutgoing().remove(e);
+        VertexAL<V> end = (VertexAL<V>)e.getEnd();
+        end.getIncoming().remove(e);
+        E elem = e.getElement();
+        return elem;
     }
 }

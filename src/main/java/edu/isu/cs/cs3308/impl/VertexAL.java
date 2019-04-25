@@ -8,7 +8,7 @@ import java.util.List;
 
 public class VertexAL<V> implements Vertex<V> {
     protected V element;
-    public LinkedList<Edge<E>> outgoing, incoming = new LinkedList<>();
+    public LinkedList outgoing, incoming = new LinkedList<>();
 
     public VertexAL(V elem) {
         element = elem;
@@ -19,14 +19,18 @@ public class VertexAL<V> implements Vertex<V> {
     }
 
     @Override
-    public <E> LinkedList<Edge<E>> getOutgoing() {
+    public <E> LinkedList<Edge<V, E>> getOutgoing() {
         return outgoing;
     }
 
     @Override
-    public <E> List<Edge<E>> getIncoming() {
-        LinkedList<Edge<E>> mlist = new LinkedList<>();
-        incoming.forEach((k, v) -> mlist.add(v));
-        return mlist;
+    public <E> List<Edge<V, E>> getIncoming() {
+        return incoming;
+    }
+    public <E> void addOutgoing(Edge<V, E> e) {
+        outgoing.add(e);
+    }
+    public <E> void addIncoming(Edge<V, E> e) {
+        incoming.add(e);
     }
 }

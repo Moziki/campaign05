@@ -3,20 +3,34 @@ package edu.isu.cs.cs3308.impl;
 import edu.isu.cs.cs3308.structures.Edge;
 import edu.isu.cs.cs3308.structures.Vertex;
 
-public class EdgeAL<E> implements Edge<E> {
+public class EdgeAL<V, E> implements Edge<V, E> {
 
-    public E element;
+    private E element;
+    private V start;
+    private V end;
     private Vertex[] endpoints;
 
-    public EdgeAL(Vertex u, Vertex v, E elem) {
+    public EdgeAL(V u, V v, E elem) {
         element = elem;
-        endpoints = new Vertex[]{u,v};
+        start = u;
+        end = v;
     }
 
     @Override
     public E getElement() {
         return null;
     }
+
+    @Override
+    public V getStart() {
+        return start;
+    }
+
+    @Override
+    public V getEnd() {
+        return end;
+    }
+
 
     @Override
     public <V> Vertex<V>[] getEndpoints() {

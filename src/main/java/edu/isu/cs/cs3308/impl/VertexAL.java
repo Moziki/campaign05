@@ -13,6 +13,9 @@ public class VertexAL<V> implements Vertex<V> {
     public VertexAL(V elem) {
         element = elem;
     }
+
+
+
     @Override
     public V getElement() {
         return element;

@@ -4,10 +4,16 @@ import edu.isu.cs.cs3308.structures.Edge;
 import edu.isu.cs.cs3308.structures.Graph;
 import edu.isu.cs.cs3308.structures.Vertex;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.ListIterator;
 
+/**
+ * @Author Dan Walker
+ * @param <V>
+ * @param <E>
+ */
 public class GraphAL<V, E> implements Graph<V, E> {
 
 
@@ -19,9 +25,8 @@ public class GraphAL<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public Iterator<Vertex<V>> vertices() {
-        return vertices.iterator();
-    }
+    public Iterator<Vertex<V>> vertices() { return vertices.iterator(); }
+
 
     @Override
     public int numEdges() {

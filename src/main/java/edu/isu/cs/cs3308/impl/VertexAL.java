@@ -6,12 +6,18 @@ import edu.isu.cs.cs3308.structures.Vertex;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @Author Dan Walker
+ * @param <V>
+ */
 public class VertexAL<V> implements Vertex<V> {
     protected V element;
-    public LinkedList outgoing, incoming = new LinkedList<>();
+    public LinkedList outgoing, incoming;
 
     public VertexAL(V elem) {
         element = elem;
+        incoming = new LinkedList<>();
+        outgoing = new LinkedList<>();
     }
 
 
@@ -30,9 +36,8 @@ public class VertexAL<V> implements Vertex<V> {
     public <E> List<Edge<V, E>> getIncoming() {
         return incoming;
     }
-    public <E> void addOutgoing(Edge<V, E> e) {
-        outgoing.add(e);
-    }
+
+    public <E> void addOutgoing(Edge<V, E> e) { outgoing.add(e); }
     public <E> void addIncoming(Edge<V, E> e) {
         incoming.add(e);
     }

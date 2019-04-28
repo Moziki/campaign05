@@ -3,6 +3,11 @@ package edu.isu.cs.cs3308.impl;
 import edu.isu.cs.cs3308.structures.Edge;
 import edu.isu.cs.cs3308.structures.Vertex;
 
+/**
+ * @Author Dan Walker
+ * @param <V>
+ * @param <E>
+ */
 public class EdgeAL<V, E> implements Edge<V, E> {
 
     private E element;

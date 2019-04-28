@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FileInput {
+/*public class FileInput {
     public GraphAL<V, E> ReadFile(String e) {
         LinkedList<String> something;
         String fileName = e;
@@ -29,3 +29,4 @@ public class FileInput {
         }
     }
 }
+*/
